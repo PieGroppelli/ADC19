@@ -43,7 +43,9 @@
       </ul>
     </div>
   </nav>
-  <canvas id="myChart"></canvas>
+  <p class="chart-container; container-sm" style="position: relative; height:70vh; width:120vw">
+    <canvas id="myChart"></canvas>
+  </p>
   <script>
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = new Chart(ctx, {
@@ -57,7 +59,7 @@
           label: 'andamento',
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 99, 132)',
-          data: [10,100, 75, 35, 20, 10]
+          data: [10, 100, 75, 35, 20, 10]
         }]
       },
 
@@ -66,7 +68,7 @@
     });
   </script>
 
-  <div class="container-fluid fixed-bottom" style="background-color: rgba(220, 220, 220, 0.603);">
+  <div class="container-fluid position-relative-bottom" style="background-color: rgba(220, 220, 220, 0.603);">
     <p align="left" style="font-size: 10px">
       Creator:<br>
       Groppelli Pietro<br>
