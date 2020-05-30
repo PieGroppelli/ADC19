@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://kit.fontawesome.com/b21837c99f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.3/jquery.csv.min.js">
+    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <title>Grafico_ADC19</title>
+</head>
+
+<body onload="getData()">
+    <div class="container-fluid" style="background-color: #235F83;">
+        <h1 style="color: white;">Analisi Dati Covid19</h1>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="previsione.html">Previsione</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="simulazione.html">Simulazione</a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+    <p align="center" style="font-size: 20px">
+        In questo grafico è visibile l'andamento del virus , i dati che vengono utilizzati sono aggiornati giornalmente
+        dai database della protezione civile
+    </p>
+    <p class="chart-container; container-sm" style="position: relative; height:70vh; width:120vw">
+        <canvas id="myChart"></canvas>
+    </p>
+
+    <script>
+        var graficox = [];
+        var positivi = [];
+        var guariti = [];
+        var deceduti = [];
+
+        function getData() {
+            $(document).ready(function () {
+                $.ajax({
+                    url: "https://raw.githubusercontent.com/PieGroppelli/ADC19/master/PieGroppelli/datiADC19.csv", // prendo i dati dal file row di github
+                    type: 'get',
+                    dataType: 'text',
+                    success: function (data) {
+                        let lines = data.split('\n').slice(
+                            1
+                            ); //lines è un array che contiene le ricghe della tabella tranne le prime due che sono quella della intestazione
+                        for (let i = 0; i < lines
+                            .length; i++) { //faccio il for per dividere le righe in colonne
+                            let temp = lines[i].split(","); // divido la colonna
+                            if (!isNaN(parseFloat(temp[0])) && !isNaN(parseFloat(temp[1])) && !
+                                isNaN(
+                                    parseFloat(temp[2])) && !isNaN(parseFloat(temp[
+                                    3]))
+                                ) { //controllo di avere solo valori numerici e non lettere o altro
+                                graficox.push(parseFloat(temp[
+                                    0])); // per l'asse x di tutti sempre uguale 
+                                positivi.push(parseFloat(temp[1])); //Susceptible people
+                                guariti.push(parseFloat(temp[2])); //Exposed people v
+                                deceduti.push(parseFloat(temp[3])); //Recovered people
+                            }
+                        }
+                        createGra();
+                    },
+                    error: function (jqXHR, textStatus, errorThrow) {
+                        console.log(textStatus);
+                    }
+                });
+            });
+            
+        }
+
+        function createGra() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                    labels: graficox,
+                    datasets: [{
+                        label: 'andamento positivi',
+                        fill: false,
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: positivi
+                    }, {
+                        label: 'andamento guariti',
+                        data: guariti,
+                        fill: false,
+                        borderColor: 'rgba(29,106,199,0.73)',
+                        borderWidth: 1
+
+                    }, {
+                        label: 'andamento morti',
+                        data: deceduti,
+                        fill: false,
+                        borderColor: 'rgba(0,0,0,255)',
+                        borderWidth: 1
+                    }]
+                },
+
+                // Configuration options go here
+                options: {}
+            });
+        }
+    </script>
+
+    <div class="container-fluid position-relative-bottom" style="background-color: rgba(220, 220, 220, 0.603);">
+        <p align="left" style="font-size: 10px">
+            Creator:<br>
+            Groppelli Pietro<br>
+            Bellani Andrea Maria<br>
+            Spinelli Gabriele<br>
+            Calestani Nicolas
+        </p>
+        <p align="right" style="font-size: 10px">Copyright© 2020 | ADC19</p>
+    </div>
+</body>
+
+</html>
