@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/b21837c99f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Analisi dati covid19 per ottenere: previsioni dell'andamento della pandemia e l'andamento in Italia">
+    <meta name="keywords" content="andamento pandemia, coronavirus, covid19, andamento futuro covid19">
+    <meta name="author" content="Andrea bellani">
+    <link rel="shortcut icon" href="icona.ico" />
+    <title>ADC19</title>
+</head>
+
+<body>
+
+<div class="container-fluid" style="background-color: #235F83;">
+    <h1 style="color: white;">Analisi Dati Covid19</h1>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link">Teoria<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="previsione.html">Previsione</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="simulazione.html">Simulazione</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Grafico.html">Grafico aggiornato</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<h1>Modello SEIR</h1>
+<p align="center">
+    Il modello SEIR viene utilizzato per gli studi di epidemiologia, <b>tale modello è uno dei più avanzati e utilizzati nello studio di casi epidemiologici.</b><br>
+    Il diagramma SEIR in basso mostra come gli individui si muovono attraverso ogni compartimento del modello. <br>La linea tratteggiata mostra come nel modello SEIR le persone guarite possono diventare nuovamente sensibili (la guarigione non conferisce immunità per tutta la vita).<br>
+<img src="SEIR.png" style="height: 15vw; width: 75vw">
+</p>
+<br>
+<h1>L'indice di infettività</h1>
+<p align="center">
+    Il numero di riproduzione di base, conosciuto come R0, indica in epidemiologia, la <b>potenziale trasmissibilità di una malattia infettiva.</b><br>
+    Più precisamente esso rappresenta il numero di nuovi casi generati, da un singolo caso durante il proprio periodo infettivo,<br><b> esprime quindi il numero atteso</b> di nuove infezioni originatesi da un singolo individuo nel corso del suo intero periodo di infettività, in una popolazione interamente suscettibile.<br>
+<img src="indiceinfettivita.png" style="height: 30vw; width: 70vw">
+</p>
+<div class="container-fluid position-relative-bottom" style="background-color: rgba(220, 220, 220, 0.603);">
+    <p align="left" style="font-size: 10px">
+        Creator:<br>
+        Groppelli Pietro<br>
+        Bellani Andrea Maria<br>
+        Spinelli Gabriele<br>
+        Calestani Nicolas
+    </p>
+    <p align="right" style="font-size: 10px">Copyright© 2020 | ADC19</p>
+</div>
+</body>
+
+</html>
